@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        border: 0;
+        background-color: #eee;
+      }
+
+      * {
+        border: 1px dashed black;
+        /* box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); */
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .f1 {
+        flex: 1;
+      }
+
+      .f2 {
+        flex: 2;
+      }
+
+      .f3 {
+        flex: 3;
+      }
+
+      .column {
+        flex-direction: column;
+      }
+
+      .white {
+        background-color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+        .content-are {
+          flex-direction: column;
+        }
+      }
+
+      /*   .flexbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+      }
+
+      .box {
+        height: 40px;
+        min-width: 80px;
+        background-color: #ccc;
+      } */
+    </style>
+  </head>
+  <body class="flex">
+    <!-- Sidebar -->
+    <div class="sidebar white" style="width: 200px; z-index: 1"></div>
+    <!-- Main -->
+    <div class="f1 flex column">
+      <!-- Header -->
+      <div class="white" style="height: 64px; z-index: 1"></div>
+      <!-- Content area -->
+      <div class="content-are f1 flex" style="overflow: auto">
+        <!-- Left -->
+        <div class="f3 flex column">
+          <!-- Top section -->
+          <div class="flex">
+            <div class="f1" style="height: 120px"></div>
+            <div class="f1" style="height: 120px"></div>
+            <div class="f1" style="height: 120px"></div>
+            <div class="f1" style="height: 120px"></div>
+          </div>
+          <!-- Bottom section -->
+          <div class="flex column">
+            <div style="height: 120px"></div>
+            <div style="height: 120px"></div>
+            <div style="height: 120px"></div>
+            <div style="height: 120px"></div>
+            <div style="height: 120px"></div>
+          </div>
+        </div>
+        <!-- Right -->
+        <div class="f1"></div>
+      </div>
+    </div>
+
+    <!-- Flexbox practice -->
+    <!-- <div class="flexbox">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box" style="flex: 1"></div>
+    </div> -->
+  </body>
+</html>
