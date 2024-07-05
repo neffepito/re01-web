@@ -4,16 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
   </head>
   <body>
-    <!-- 本地计数按钮不断+1: 为按钮设置id, 使用点击事件属性触发函数执行 -->
-    <button id="likeButton" onclick="likeAdd()">0</button>
-    <!-- 模拟调用服务器数据库，无法交互 -->
-    <button id="cycleLikeButton" onclick=""></button>
+    <div class="functionButton">
+      <!-- 本地计数按钮不断+1: 为按钮设置id, 使用点击事件属性触发函数执行 -->
+      <button id="likeCountLabel" onclick="likeAdd()">0</button>
+      <!-- 模拟调用服务器数据库，无法交互 -->
+      <button id="cycleLikeButton" onclick=""></button>
+    </div>
     <script>
+      // var 存在作用域污染问题 "B" 会覆盖 "A" 的值；使用 let 作用域仅在{}中，而 var 会覆盖之前的变量
+      {
+        var A = "A";
+      }
+      {
+        var A = "AA";
+      }
+      document.write(A);
+
+      // let 没有作用域污染问题
+      {
+        let B = "B";
+      }
+      {
+        let B = "C";
+        B.toUpperCase; // 这里的 B 称为「原始值」.后面有许多有用的函数
+      }
+      // document.write(B); 这样会报错，因为作用域限制无法获取这个变量
+      let array1 = ["data1", "data2", "data3"];
+      let array2 = [1, true, null, undefined, { a: "a" }]; // 数组的另一种形式
+      document.write(array1);
+
       // 循环+1函数
       function likeAdd() {
-        let likeCountLabel = window.document.getElementById("likeButton");
+        let likeCountLabel = window.document.getElementById("likeCountLabel");
         let likeCount = parseInt(likeCountLabel.innerText);
         let newLikeCount = likeCount + 1;
         likeCountLabel.innerText = newLikeCount;
@@ -32,26 +57,15 @@
           document.getElementById("cycleLikeButton").innerText = likeCount;
         }
       }
-      // var 存在作用域污染问题 "B" 会覆盖 "A" 的值；使用 let 作用域仅在{}中，而 var 会覆盖之前的变量
-      {
-        var A = "A";
+      // 写一个乘法函数
+      function addition(para1, para2) {
+        let result = para1 + para2;
+        return result; // 没有 return 会返回 undefined
       }
-      {
-        var A = "B";
-      }
-      document.write(A);
-      // let 没有作用域污染问题
-      {
-        let B = "B";
-      }
-      {
-        let B = "C";
-        B.toUpperCase; // 这里的 B 称为「原始值」.后面有许多有用的函数
-      }
-      document.B; // 这样会报错，因为作用域限制无法获取这个变量
-      let array1 = ["data1", "data2", "data3"];
-      let array2 = [1, true, null, undefined, { a: "a" }]; // 数组的另一种形式
-      document.write(array1);
+      let p1 = 1;
+      let p2 = 3;
+      let result = addition(p1, p2);
+      window.document.write("result" + "=" + result);
     </script>
   </body>
 </html>

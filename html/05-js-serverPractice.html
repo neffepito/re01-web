@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+  </head>
+  <body style="display: flex; justify-content: center; align-items: center">
+    <div class="container">
+      <input
+        id="todoInput"
+        placeholder="What to do?"
+        type="text"
+        style="border-radius: 0; outline: 0"
+      />
+      <span id="action" onclick="change()">☑️</span>
+    </div>
+    <script>
+      let todoFilled = false;
+
+      function change() {
+        let action = document.getElementById("action");
+        let todoInput = document.getElementById("todoInput");
+
+        if (todoFilled) {
+          todoFilled = false;
+          action.innerText = "☑️";
+          todoInput.style.borderBottomColor = "#fff";
+          todoInput.value = "";
+          todoInput.readOnly = false;
+          window.localStorage.removeItem("todo");
+        } else {
+          todoFilled = true;
+          action.innerText = "🗑️";
+          action.style.borderBlockColor = "transparent";
+          todoInput.readOnly = true;
+          fetch("http://localhost:3000/" + todoInput.value, {
+            method: "POST",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            });
+        }
+      }
+
+      fetch("http://localhost:3000/", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((jsonData) => {
+          console.log(jsonData);
+          if (jsonData.data) {
+            document.getElementById("todoInput").value = jsonData.data;
+            todoFilled = true;
+            action.innerText = "🗑";
+            todoInput.style.borderBottomColor = "transparent";
+            todoInput.readOnly = true;
+          }
+        });
+    </script>
+  </body>
+</html>
