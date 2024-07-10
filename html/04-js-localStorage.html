@@ -9,39 +9,39 @@
   <body style="display: flex; justify-content: center; align-items: center">
     <div class="container">
       <input
-        id="todoInput"
+        id="todo"
         placeholder="What to do?"
         type="text"
         style="border-radius: 0; outline: 0"
       />
-      <span id="action" onclick="change()">☑️</span>
+      <span id="action" onclick="change()">💾</span>
     </div>
     <script>
       let todoFilled = false;
 
       function change() {
         let action = document.getElementById("action");
-        let todoInput = document.getElementById("todoInput");
+        let todoData = document.getElementById("todo");
 
         if (todoFilled) {
           todoFilled = false;
-          action.innerText = "☑️";
-          todoInput.style.borderBottomColor = "#fff";
-          todoInput.value = "";
-          todoInput.readOnly = false;
+          action.innerText = "💾";
+          todoData.style.borderBottomColor = "#fff";
+          todoData.value = "";
+          todoData.readOnly = false;
           window.localStorage.removeItem("todo");
         } else {
           todoFilled = true;
           action.innerText = "🗑️";
           action.style.borderBlockColor = "transparent";
-          todoInput.readOnly = true;
-          window.localStorage.setItem("todo", todoInput.value);
+          todoData.readOnly = true;
+          window.localStorage.setItem("todo", todoData.value);
         }
       }
 
       let data = window.localStorage.getItem("todo");
       if (data) {
-        document.getElementById("todoInput").value = data;
+        document.getElementById("todo").value = data;
         change();
       }
     </script>
